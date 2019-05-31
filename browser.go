@@ -96,6 +96,7 @@ func NewBrowser(ctx context.Context, urlstr string, opts ...BrowserOption) (*Bro
 
 	var err error
 	urlstr = forceIP(urlstr)
+	urlstr = strings.Replace(urlstr, `\r`, "", -1)
 	b.conn, err = DialContext(dialCtx, urlstr, WithConnDebugf(b.dbgf))
 	if err != nil {
 		return nil, fmt.Errorf("could not dial %q: %v", urlstr, err)
